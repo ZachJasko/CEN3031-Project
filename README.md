@@ -40,7 +40,7 @@ Because Swamp Services needs UFID to access, if any crime or harassment occurs, 
 - Copy the *http://...* link in your browser and run.
 - When done running. Close the environment: `deactivate`
 
-3. Run following commands in the Windows:
+3. Run following commands in the Mac:
 - `python3 -m venv <your_env_name>`
 - `source ./<your_env_name>/Scripts/activate`
 - `pip install -r requirements.txt`
