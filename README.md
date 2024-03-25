@@ -34,6 +34,8 @@ Because Swamp Services needs UFID to access, if any crime or harassment occurs, 
 - `python -m virtualenv <your_env_name>`
 - `.\<your_env_name>\Scripts\activate`
 - `pip install -r requirements.txt`
+- `python manage.py makemigrations` 
+- `python manage.py migrate`     
 - `python manage.py runserver`
 - Copy the *http://...* link in your browser and run.
 - When done running. Close the environment: `deactivate`
@@ -42,6 +44,8 @@ Because Swamp Services needs UFID to access, if any crime or harassment occurs, 
 - `python3 -m venv <your_env_name>`
 - `source ./<your_env_name>/Scripts/activate`
 - `pip install -r requirements.txt`
+- `python manage.py makemigrations` 
+- `python manage.py migrate`     
 - `python manage.py runserver`
 - Copy the *http://...* link in your browser and run.
 - When done running. Close the environment: `deactivate`
