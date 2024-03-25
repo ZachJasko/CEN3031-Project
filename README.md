@@ -24,3 +24,24 @@ Because Swamp Services needs UFID to access, if any crime or harassment occurs, 
 - Require conversation resolution before merging
 
 
+### Project setup and running
+
+1. Install postgresSQL:
+    - On Windows: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+    -  On Mac, run this command in the terminal to install postgres: `brew install postgres`
+2. Run following commands in the Windows:
+- `pip install virtualenv`
+- `python -m virtualenv <your_env_name>`
+- `.\<your_env_name>\Scripts\activate`
+- `pip install -r requirements.txt`
+- `python manage.py runserver`
+- Copy the *http://...* link in your browser and run.
+- When done running. Close the environment: `deactivate`
+
+3. Run following commands in the Windows:
+- `python3 -m venv <your_env_name>`
+- `source ./<your_env_name>/Scripts/activate`
+- `pip install -r requirements.txt`
+- `python manage.py runserver`
+- Copy the *http://...* link in your browser and run.
+- When done running. Close the environment: `deactivate`
