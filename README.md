@@ -26,9 +26,12 @@ Because Swamp Services needs UFID to access, if any crime or harassment occurs, 
 
 ### Project setup and running
 
+0. python version: Python 3.12.1
+
 1. Install postgresSQL:
     - On Windows: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
     -  On Mac, run this command in the terminal to install postgres: `brew install postgres`
+
 2. Run following commands in the Windows:
 - `pip install virtualenv`
 - `python -m virtualenv <your_env_name>`
@@ -41,11 +44,12 @@ Because Swamp Services needs UFID to access, if any crime or harassment occurs, 
 - When done running. Close the environment: `deactivate`
 
 3. Run following commands in the Mac:
+- `pip3 install virtualenv`
 - `python3 -m venv <your_env_name>`
-- `source ./<your_env_name>/Scripts/activate`
-- `pip install -r requirements.txt`
-- `python manage.py makemigrations` 
-- `python manage.py migrate`     
-- `python manage.py runserver`
+- `source <your_env_name>/bin/activate`
+- `pip3 install -r requirements.txt`
+- `python3 manage.py makemigrations` 
+- `python3 manage.py migrate`     
+- `python3 manage.py runserver`
 - Copy the *http://...* link in your browser and run.
 - When done running. Close the environment: `deactivate`
