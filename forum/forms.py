@@ -22,15 +22,14 @@ class UserPostForm(forms.ModelForm):
         model = UserPost
         fields = ['title', 'description', 'accept_job']
 
-class AnswerForm(forms.ModelForm):
-
-    content = forms.CharField(label="", widget=forms.Textarea(attrs={
-        'class':'form-control form-control-style-3',
-        'placeholder':'Write your answer...',
-        'rows':'8',
-        'cols':'50',
+class AcceptJobform(forms.ModelForm):
+    content = forms.CharField(label="Comment", widget=forms.Textarea(attrs={
+        'class': 'form-control form-control-style-3',
+        'placeholder': 'Comment...',
+        'rows': '8',
+        'cols': '30',
     }))
 
     class Meta:
-        model = Answer
-        fields = ['content',]
+        model = JobAcceptance
+        fields = ['content']

@@ -7,9 +7,7 @@
         <div class="row vertical-gap md-gap">
             <div class="col-lg-8">
                 <div class="dx-blog-post dx-box dx-box-decorated">
-
                     <div class="dx-blog-post-box">
-
                         <h1 class="h3 dx-blog-post-title">{{ topic.title }}</h1>
                         <ul class="dx-blog-post-info">
                             <li>Date Posted: {{ topic.date_created }}</li>
@@ -18,65 +16,54 @@
                         </ul>
                         <p class="mnb-2">{{ topic.description }}</p>
                     </div>
-
                 </div>
                 <div class="dx-box mt-55">
                     {% if  answers.count > 0 %}
-                    <h2 class="h4 mb-45">{{ answers.count }} replies{{ answers|pluralize }} in this topic: </h2>
+                        <h2 class="h4 mb-45">{{ answers.count }} replies{{ answers|pluralize }} in this topic: </h2>
                     {% else %}
-                    <h2 class="h4 mb-45">Be the first to reply to this topic.</h2>
+                        <h2 class="h4 mb-45">Be the first to reply to this topic.</h2>
                     {% endif %}
                     {% for answer in answers %}
-                    <div class="dx-comment">
-
-                        <div>
-                            <div class="dx-comment-img">
-                                <img src="{{ answer.user.author.profile_pic.url }}" alt="" class="rounded-circle">
-                            </div>
-                            <div class="dx-comment-cont">
-                                <p class="dx-comment-info">
-                                    <span class="dx-comment-name">{{ answer.user|capfirst }}</span>
-
-                                    {% if answer.user.author.is_moderator %}
-                                    <span class="dx-comment-profession">
-                                        <img src="{% static 'images/SG-Logo-Color.png' %}" width="45px;" alt="">
-                                        <span class="label-moderator">Student Council Moderator</span>
-                                    </span>
-                                    {% else %}
-                                    <span class="dx-comment-profession">
-                                        <img src="{% static 'images/badge-user.png' %}" width="45px;" alt="">
-                                        <span class="label-user">General User</span>
-                                    </span>
-                                    {% endif %}
-
-                                    <span class="dx-comment-date">
-                                        answered at {{ answer.date_created }}
-                                    </span>
-                                </p>
-
-                                <div class="dx-comment-text">
-                                    <p class="mb-0">{{ answer.content }}</p>
+                        <div class="dx-comment">
+                            <div>
+                                <div class="dx-comment-img">
+                                    <img src="{{ answer.user.author.profile_pic.url }}" alt="" class="rounded-circle">
                                 </div>
-                                <!-- vote section -->
-                                <div id="vote-section">
-                                    {% include 'vote-section.html' %}
+                                <div class="dx-comment-cont">
+                                    <p class="dx-comment-info">
+                                        <span class="dx-comment-name">{{ answer.user|capfirst }}</span>
+                                        {% if answer.user.author.is_moderator %}
+                                            <span class="dx-comment-profession">
+                                                <img src="{% static 'images/SG-Logo-Color.png' %}" width="45px;" alt="">
+                                                <span class="label-moderator">Student Council Moderator</span>
+                                            </span>
+                                        {% else %}
+                                            <span class="dx-comment-profession">
+                                                <img src="{% static 'images/badge-user.png' %}" width="45px;" alt="">
+                                                <span class="label-user">General User</span>
+                                            </span>
+                                        {% endif %}
+                                        <span class="dx-comment-date">
+                                            answered at {{ answer.date_created }}
+                                        </span>
+                                    </p>
+                                    <div class="dx-comment-text">
+                                        <p class="mb-0">{{ answer.content }}</p>
+                                    </div>
                                 </div>
-                                <!-- / vote section -->
-
                             </div>
                         </div>
-                    </div>
                     {% endfor %}
-
-                    {% if not topic.accepted %}
                     <div class="mt-3">
-                        <form action="{% url 'accept_job_posting' post_id=topic.pk %}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-primary">Accept Job</button>
-                        </form>
+                        {% if topic.accepted %}
+                            <p class="text-success">This job has already been accepted.</p>
+                        {% else %}
+                            <form action="{% url 'accept_job_posting' pk=topic.pk %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Accept Job</button>
+                            </form>
+                        {% endif %}
                     </div>
-                    {% endif %}
-
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 # Model Forms.
-from .forms import UserPostForm, AnswerForm
+from .forms import UserPostForm, AcceptJobform
 # String module
 from django.template.loader import render_to_string
 
@@ -47,26 +47,18 @@ def userPost(request):
     return render(request, 'user-post.html', context)
 
 @login_required(login_url='login')
+@login_required(login_url='login')
 def postTopic(request, pk):
-    # Get specific user post by id.
     post_topic = get_object_or_404(UserPost, pk=pk)
-
-    # Count Post View only for authenticated users
-    if request.user.is_authenticated:
-        TopicView.objects.get_or_create(user=request.user, user_post=post_topic)
-
-    # Check if the job has already been accepted
-    job_accepted = post_topic.accepted
 
     context = {
         'topic': post_topic,
-        'job_accepted': job_accepted,
     }
     return render(request, 'topic-detail.html', context)
 
 @login_required(login_url='login')
-def acceptJobPosting(request, post_id):
-    post = get_object_or_404(UserPost, id=post_id)
+def acceptJobPosting(request, pk):
+    post = get_object_or_404(UserPost, id=pk)
     if request.method == 'POST':
         # Process the form submission
         comment = request.POST.get('comment')  # Assuming the comment is submitted via a form
@@ -80,7 +72,7 @@ def acceptJobPosting(request, post_id):
         post.save()
 
         # Redirect to the job posting detail page
-        return redirect('topic-detail', pk=post_id)
+        return redirect('topic-detail', pk=pk)
 
     # If the request method is not POST (e.g., GET request), render a form to accept the job
     return render(request, 'accept_job_posting.html', {'post': post})
@@ -123,37 +115,6 @@ def searchView(request):
 
     return render(request, 'search-result.html', context)
 
-
-def upvote(request):
-    answer = get_object_or_404(Answer, id=request.POST.get('answer_id'))
-    
-    has_upvoted = False
-
-    if answer.upvotes.filter(id = request.user.id).exists():
-        answer.upvotes.remove(request.user)
-        has_upvoted = False        
-    else:
-        answer.upvotes.add(request.user)
-        answer.downvotes.remove(request.user)
-        has_upvoted = True
-
-    return HttpResponseRedirect(answer.user_post.get_absolute_url())
-    
-
-def downvote(request):
-    answer = get_object_or_404(Answer, id=request.POST.get('answer_id'))
-    
-    has_downvoted = False
-    
-    if answer.downvotes.filter(id = request.user.id).exists():
-        answer.downvotes.remove(request.user)
-        has_downvoted = False
-    else:
-        answer.downvotes.add(request.user)
-        answer.upvotes.remove(request.user)
-        has_downvoted = True
-    
-    return HttpResponseRedirect(answer.user_post.get_absolute_url())
 
 # Blog listing page view.
 def blogListView(request):

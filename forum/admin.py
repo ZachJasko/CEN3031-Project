@@ -5,6 +5,6 @@ from .models import *
 
 admin.site.register(UserPost)
 admin.site.register(Author)
-admin.site.register(Answer)
+admin.site.register(JobAcceptance)
 admin.site.register(TopicView)
 admin.site.register(BlogPost)
