@@ -10,7 +10,8 @@ class Author(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     profile_pic = models.ImageField(default="gator-mascot-head-vector.png", null=True, blank=True)
     is_moderator = models.BooleanField(default=False)
-
+    gator_points = models.IntegerField(default=0)
+    
     def __str__(self):
         return self.user.username
 

@@ -64,8 +64,10 @@ body{
     border-width: 2px;
 }
 
+
+/*
 .upvote-count, .downvote-count{
-    border: ;
+    border: 1px solid black;
     width: 10px;
     background-color: #2B72E6;
     color: white;
@@ -73,6 +75,7 @@ body{
     padding: 5px 10px;
     line-height: 2;
 }
+*/
 
 .dx-comment .dx-comment-cont .dx-comment-name {
   top: 0px;

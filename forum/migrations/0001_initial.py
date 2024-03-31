@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='Author',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('profile_pic', models.ImageField(blank=True, default='pro_pic.png', null=True, upload_to='')),
+                ('profile_pic', models.ImageField(blank=True, default='gator-mascot-head-vector.png', null=True, upload_to='')),
                 ('is_moderator', models.BooleanField(default=False)),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
