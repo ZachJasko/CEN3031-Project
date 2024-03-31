@@ -19,6 +19,8 @@ class UserPost(models.Model):
     title = models.CharField(max_length=200, null=True)
     description = models.TextField(max_length=500, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    accepted = models.BooleanField(default=False)  # New field for marking acceptance
+
 
     def __str__(self):
         return self.title
@@ -72,7 +74,14 @@ class TopicView(models.Model):
         return self.user_post.title
 
     
-    
+class JobAcceptance(models.Model):
+    user_post = models.ForeignKey(UserPost, on_delete=models.CASCADE)
+    accepted_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.TextField(blank=True, null=True)
+    date_accepted = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user_post.title} - Accepted by {self.accepted_by.username}"
 
 
 

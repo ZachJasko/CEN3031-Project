@@ -55,28 +55,35 @@ def postTopic(request, pk):
     if request.user.is_authenticated:
         TopicView.objects.get_or_create(user=request.user, user_post=post_topic)
 
-    # Get all answers of a specific post.
-    answers = Answer.objects.filter(user_post = post_topic)
+    # Check if the job has already been accepted
+    job_accepted = post_topic.accepted
 
-    # Answer form.
-    answer_form = AnswerForm(request.POST or None)
-    if request.method == "POST":
-        if answer_form.is_valid():
-            content = request.POST.get('content')
-            # passing User Id & User Post Id to DB
-            ans = Answer.objects.create(user_post=post_topic, user=request.user, content=content)
-            ans.save()
-            return HttpResponseRedirect(post_topic.get_absolute_url())
-    else:
-        answer_form = AnswerForm()
-    
     context = {
-        'topic':post_topic,
-        'answers':answers,
-        'answer_form':answer_form,
-        
+        'topic': post_topic,
+        'job_accepted': job_accepted,
     }
     return render(request, 'topic-detail.html', context)
+
+@login_required(login_url='login')
+def acceptJobPosting(request, post_id):
+    post = get_object_or_404(UserPost, id=post_id)
+    if request.method == 'POST':
+        # Process the form submission
+        comment = request.POST.get('comment')  # Assuming the comment is submitted via a form
+
+        # Save the job acceptance
+        job_acceptance = JobAcceptance.objects.create(user_post=post, accepted_by=request.user, comment=comment)
+        job_acceptance.save()
+
+        # Mark the job posting as accepted
+        post.accepted = True
+        post.save()
+
+        # Redirect to the job posting detail page
+        return redirect('topic-detail', pk=post_id)
+
+    # If the request method is not POST (e.g., GET request), render a form to accept the job
+    return render(request, 'accept_job_posting.html', {'post': post})
 
 @login_required(login_url='login')
 def userDashboard(request):

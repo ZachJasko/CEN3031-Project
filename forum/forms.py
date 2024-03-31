@@ -15,9 +15,12 @@ class UserPostForm(forms.ModelForm):
         'cols':'80',
     }))
 
+    accept_job = forms.BooleanField(label="Accept Job", required=False)  # New field
+
+
     class Meta:
         model = UserPost
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'accept_job']
 
 class AnswerForm(forms.ModelForm):
 
