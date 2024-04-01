@@ -82,7 +82,7 @@ def profileView(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, f"Your profile has been updated successfully!")
+            messages.success(request, "Your profile has been updated successfully!")
             return redirect('profile')
     else:
         user_form = UserUpdateForm(instance=request.user)
@@ -93,3 +93,7 @@ def profileView(request):
         'profile_form':profile_form
     }
     return render(request, 'registration/profile.html', context)
+
+@login_required
+def profile(request):
+    return render(request, 'registration/profile.html')
