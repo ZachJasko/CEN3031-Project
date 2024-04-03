@@ -117,36 +117,6 @@ def searchView(request):
     return render(request, 'search-result.html', context)
 
 
-def upvote(request):
-    answer = get_object_or_404(Answer, id=request.POST.get('answer_id'))
-    
-    has_upvoted = False
-
-    if answer.upvotes.filter(id = request.user.id).exists():
-        answer.upvotes.remove(request.user)
-        has_upvoted = False        
-    else:
-        answer.upvotes.add(request.user)
-        answer.downvotes.remove(request.user)
-        has_upvoted = True
-
-    return HttpResponseRedirect(answer.user_post.get_absolute_url())
-    
-
-def downvote(request):
-    answer = get_object_or_404(Answer, id=request.POST.get('answer_id'))
-    
-    has_downvoted = False
-    
-    if answer.downvotes.filter(id = request.user.id).exists():
-        answer.downvotes.remove(request.user)
-        has_downvoted = False
-    else:
-        answer.downvotes.add(request.user)
-        answer.upvotes.remove(request.user)
-        has_downvoted = True
-    
-    return HttpResponseRedirect(answer.user_post.get_absolute_url())
 
 # Blog listing page view.
 def blogListView(request):
