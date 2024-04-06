@@ -7,7 +7,29 @@
             <div class="row vertical-gap md-gap">
                 <div class="col-lg-8">
                     <h2 class="h4">Post A New Topic</h2>
-                    <div class="dx-box mt-55">
+
+                    <label for="startdate">Select the service start date:</label>
+                    <input type="date" id="startdate" name="startdate">
+
+                    <label for="enddate">Select the service end date:</label>
+                    <input type="date" id="enddate" name="enddate">
+
+                    <label for="category">Select a Post Category:</label>
+                    <select name="category" id="category">
+                        <option value="pet">Pet Services</option>
+                        <option value="moving">Moving Services</option>
+                        <option value="food" ">Food Donations</option>
+                        <option value="event">Event Planning Services</option>
+                        <option value="textbook">Textbook Exchanges</option>
+                        <option value="material">Study Material Donations</option>
+                        <option value="clothing">Clothing Donations</option>
+                        <option value="transport">Transport/Carpool Services</option>
+                        <option value="technology">Technology Repair Services</option>
+                        <option value="car">Car Repair Services</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <p class="dx-box mt-55">
                         <form action="" method="POST" class="dx-form mt-50 mb-45">
                             <div class="row vertical-gap">
                                 <div class="col-12">
@@ -16,8 +38,10 @@
                                     <input type="submit" class="dx-btn dx-btn-lg" value="Post">
                                 </div>
                             </div>
+
                         </form>
-                    </div>
+                    </p>
+                </div>
                 </div>
                 <div class="col-lg-4">
                 </div>

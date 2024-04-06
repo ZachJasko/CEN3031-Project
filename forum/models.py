@@ -11,7 +11,8 @@ class Author(models.Model):
     profile_pic = models.ImageField(default="gator-mascot-head-vector.png", null=True, blank=True)
     is_moderator = models.BooleanField(default=False)
     gator_points = models.IntegerField(default=0)
-    
+    bio = models.TextField(max_length=500, blank=True)  # bio field
+
     def __str__(self):
         return self.user.username
 
@@ -71,9 +72,6 @@ class TopicView(models.Model):
 
     def __str__(self):
         return self.user_post.title
-
-    
-    
 
 
 

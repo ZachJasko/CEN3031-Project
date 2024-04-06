@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div id="signup" style="background: #1B1B1B;">
-    
+<div id="signup" style="background-color: transparent;">
+    <div class="bg-image bg-image-parallax">
+        <img src="{% static '../static/images/register-background.jfif' %}" class="jarallax-img" alt="">
+        <div style="background-color: rgba(0,0,255,0.25);"></div>
+    </div>
+
     <div class="dx-signin text-center">
-        <h1 class="h3 text-white mb-30">Sign Up</h1>
+
+        <h1 class="h3 text-black mb-30" style="font-weight: 500">Sign Up</h1>
 
         <form method="POST" class="dx-form">
             {% csrf_token %}
@@ -22,41 +27,43 @@
             </div>
             <div class="form-check-inline">
                 <label class="form-check-container">
-                    <span class="label-text"> I am a Student Government Member</span>   
+                    <span class="label-text text-white" style="font-weight: bold"> I am a Student Government Member</span>
                     {{ pro_form.is_moderator}}
                     <span class="checkmark"></span>
                 </label>
             </div>
-            
-              
+
             <div class="dx-form-group-md">
                 <input type="submit" value="Sign Up">
             </div>
-            
 
-            <div class="dx-form-group-md">
-                <div class="d-flex justify-content-between">
-                    <span style="color:#bababa;">Already have an account?</span>   
-                    <a href="{% url 'login' %}" style="text-decoration: underline;">Log In</a>
+            <div style="text-align: center;">
+                <div class="dx-form-group-md" style="display: inline-block;">
+                    <div class="d-flex justify-content-between">
+                        <span style="color: white; font-weight: bold;">
+                            Already have an account?
+                            <a href="{% url 'login' %}" style="text-decoration: underline; color: white; font-weight: bold;">Log In</a>
+                        </span>
+                    </div>
                 </div>
             </div>
         </form>
         <div class="err-msg">
             {% if reg_form.errors %}
-                <!-- Error messaging -->
-                <div id="errors">
-                    <div class="inner">
-                        <p>There were some errors in the information you entered. Please correct the following:</p>
-                        <ol style="text-align: left;">
-                            {% for field in reg_form %}
-                                {% if field.errors %}
-                                    <li>{{ field.label }}: {{ field.errors|striptags }}</li>
-                                {% endif %}
-                            {% endfor %}
-                        </ol>
-                    </div>
+            <!-- Error messaging -->
+            <div id="errors">
+                <div class="inner">
+                    <p style="color: black">There were some errors in the information you entered. Please correct the following:</p>
+                    <ol style="text-align: left; color: black">
+                        {% for field in reg_form %}
+                        {% if field.errors %}
+                        <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+                        {% endif %}
+                        {% endfor %}
+                    </ol>
                 </div>
-                <!-- /Error messaging -->
+            </div>
+            <!-- /Error messaging -->
             {% endif %}
         </div>
     </div>
@@ -89,4 +96,3 @@
 </script>
 
 {% endblock content %}
-

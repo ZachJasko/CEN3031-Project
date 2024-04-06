@@ -223,3 +223,9 @@ body{
 .dropdown-menu.show {
 	margin-top: 30px;
 }
+
+.bio-text {
+  white-space: pre-wrap; /* or normal */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}

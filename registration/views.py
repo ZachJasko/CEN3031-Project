@@ -8,7 +8,9 @@ from django.contrib.auth.forms import User
 
 from forum.models import Author
 
+
 from .forms import UserRegisterForm, UserProfileForm, UserUpdateForm, ProfileUpdateForm
+
 
 # Create your views here.
 
@@ -93,3 +95,4 @@ def profileView(request):
         'profile_form':profile_form
     }
     return render(request, 'registration/profile.html', context)
+

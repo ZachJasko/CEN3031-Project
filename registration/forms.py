@@ -31,4 +31,4 @@ class UserUpdateForm(ModelForm):
 class ProfileUpdateForm(ModelForm):
     class Meta:
         model = Author
-        fields = ['profile_pic']
+        fields = ['profile_pic', 'bio']
