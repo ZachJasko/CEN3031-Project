@@ -47,7 +47,8 @@ class Answer(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     upvotes = models.ManyToManyField(User, blank=True, related_name='upvotes')
     downvotes = models.ManyToManyField(User, blank=True, related_name='downvotes')
-
+    accepted = models.BooleanField(default=False)
+    
     def __str__(self):
         return self.user_post.title
     

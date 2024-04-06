@@ -8,9 +8,7 @@
             <div class="row vertical-gap md-gap">
                 <div class="col-lg-8">
                     <div class="dx-blog-post dx-box dx-box-decorated">
-
                         <div class="dx-blog-post-box">
-
                             <h1 class="h3 dx-blog-post-title">{{ topic.title }}</h1>
                             <ul class="dx-blog-post-info">
                                 <li>Date Posted: {{ topic.date_created }}</li>
@@ -19,17 +17,17 @@
                             </ul>
                             <p class="mnb-2">{{ topic.description }}</p>
                         </div>
-
                     </div>
+
                     <div class="dx-box mt-55">
                         {% if  answers.count > 0 %}
                         <h2 class="h4 mb-45">{{ answers.count }} replies{{ answers|pluralize }} in this topic: </h2>
                         {% else %}
                         <h2 class="h4 mb-45">Be the first to reply to this topic.</h2>
                         {% endif %}
-                        {% for answer in answers %}
-                        <div class="dx-comment">
 
+                        {% for answer in answers %}
+                        <div class="dx-comment {% if answer.accepted %}accepted-answer{% endif %}"> 
                             <div>
                                 <div class="dx-comment-img">
                                     <img src="{{ answer.user.author.profile_pic.url }}" alt="" class="rounded-circle">
@@ -58,17 +56,28 @@
                                     <div class="dx-comment-text">
                                         <p class="mb-0">{{ answer.content }}</p>
                                     </div>
+
                                     <!-- vote section -->
                                     <div id="vote-section">
                                         {% include 'vote-section.html' %}
                                     </div>
                                     <!-- / vote section -->
 
+                                    <!-- Accept Service Button -->
+                                    {% if user == topic.author.user %}
+                                        <a href="{{ accept_answer_url }}" class="btn btn-success">
+                                            {% if answer.accepted %}
+                                                Unaccept Service
+                                            {% else %}
+                                                Accept Service
+                                            {% endif %}
+                                        </a>
+                                    {% endif %}
+                                    <!-- / Accept Service Button -->
                                 </div>
                             </div>
                         </div>
                         {% endfor %}
-
 
                         <form action="" method="POST" class="dx-form mt-50 mb-45">
                             <div class="row vertical-gap">
@@ -85,4 +94,4 @@
         </div>
     </div>
 </div>
-    {% endblock content %}
+{% endblock content %}

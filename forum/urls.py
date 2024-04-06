@@ -12,4 +12,5 @@ urlpatterns = [
     path('downvote/', views.downvote, name='downvote'),
     path('blog/', views.blogListView, name='blog'),
     path('article/<slug:slug>/', views.blogDetailView, name='article-detail'),
+    path('accept-answer/<int:pk>/', views.accept_answer, name='accept_answer'),
 ]
