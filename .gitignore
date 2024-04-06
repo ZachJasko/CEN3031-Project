@@ -65,3 +65,8 @@ pip-log.txt
 env/
 venv/
 projectenv/
+SwampServicesProgramEnv
+SwampServicesTestingEnv
+
+# Text files
+accounts.txt
