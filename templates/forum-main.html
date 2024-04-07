@@ -50,9 +50,12 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Topic</th>
+                                            <th scope="col">Category</th>
                                             <th scope="col">Views</th>
                                             <th scope="col">Replies</th>
                                             <th scope="col">Post Date</th>
+                                            <th scope="col">Gator Points</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -62,19 +65,26 @@
                                                 <a href="{% url 'topic-detail' post.id %}" class="dx-table-default-title">{{ post.title }}</a>
                                                 <p class="mb-0">{{ post.description }}</p>
                                             </th>
+
+                                            <td></td>
+
                                             <td>{{ post.topic_view_count }}</td>
-                                            
-                                           
+
+
                                             <td>{{ post.answer_count }}</td>
-                                            
-                                            
+
+
                                             <td class="dx-table-lastPost">
                                                 <div class="dx-table-default-info">
-                                                    <p class="mb-0">by <span style="color:rgb(255,255,255);">{{ post.author.user }}</span> 
+                                                    <p class="mb-0">
+                                                        <span style="color:black;">{{ post.author.user }}</span>
                                                         <br><span class="dib">{{ post.date_created }}
                                                     </p>
                                                 </div>
                                             </td>
+
+                                            <td></td>
+
                                         </tr>
                                         {% endfor %}                                    
                                     </tbody>
