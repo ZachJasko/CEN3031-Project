@@ -16,3 +16,8 @@ db.sqlite3
 env/
 venv/
 projectenv/
+SwampServicesProgramEnv/
+SwampServicesTestingEnv/
+
+# Text files
+accounts.txt

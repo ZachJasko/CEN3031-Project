@@ -68,11 +68,10 @@
         <div class="container">
 
             <a href="{% url 'home' %}" class="dx-nav-logo">
-                <img src="../static/images/swamp-services-logo.png" width="85"" height="85">
+                <img src="{% static '../static/images/swamp-services-logo.png' %}" alt="" width="85" height="85">
                 <h2 class="text-white" style="margin-top:0px; padding-top:10px; margin-bottom:0;">Swamp Services</h2>
             </a>
 
-            
             <button type="button" class="dx-navbar-burger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span style="color:white">Menu</span> </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{% url 'home' %}">Home</a>
