@@ -16,14 +16,17 @@
                                 <li>Date Posted: {{ topic.date_created }}</li>
                                 <li>Total Views: {{ topic.topic_view_count }}</li>
                                 <li>Author: {{ topic.author.user }}</li>
+                                <li>Category: </li>
+                                <li>Service Start Date: </li>
+                                <li>Service End Date: </li>
                             </ul>
                             <p class="mnb-2">{{ topic.description }}</p>
                         </div>
-
                     </div>
+
                     <div class="dx-box mt-55">
                         {% if  answers.count > 0 %}
-                        <h2 class="h4 mb-45">{{ answers.count }} replies{{ answers|pluralize }} in this topic: </h2>
+                        <h2 class="h4 mb-45">{{ answers.count }} replie{{ answers|pluralize }} in this topic: </h2>
                         {% else %}
                         <h2 class="h4 mb-45">Be the first to reply to this topic.</h2>
                         {% endif %}
@@ -45,7 +48,7 @@
                                         </span>
                                         {% else %}
                                         <span class="dx-comment-profession">
-                                            <img src="{% static 'images/badge-user.png' %}" width="45px;" alt="">
+                                            <img src="{% static '../static/images/gator-mascot-head-vector.png' %}" width="45px;" alt="">
                                             <span class="label-user">General User</span>
                                         </span>
                                         {% endif %}
@@ -76,6 +79,29 @@
                         </form>
                     </div>
                 </div>
+
+                {% if user.author.is_moderator %}
+                <div class="col-lg-4">
+
+                    <div class="dx-sticky dx-sidebar" data-sticky-offsettop="120" data-sticky-offsetbot="40">
+
+                        <div class="dx-widget dx-box dx-box-decorated">
+                            <div class="dx-widget-title">Assign Gator Points</div>
+                            <label for="points">Points (between 1 and 10):</label>
+                            <input type="number" id="points" name="points" min="1" max="10">
+                            <input type="submit" onclick="alert('You assigned Gator Points!')">
+                        </div>
+
+                        <div class="dx-widget dx-box dx-box-decorated">
+                            <div class="dx-widget-title">Status of Post (Open or Close)</div>
+                            <!--#If it is after the service end date, automatically close the post
+                #Admin should have ability to close or open a post for saftey reasons-->
+                            <button type="button" onclick="alert('This post has been CLOSED!')">Close this Post</button>
+                            <button type="button" onclick="alert('This post has been OPEN!')">Open this Post</button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
