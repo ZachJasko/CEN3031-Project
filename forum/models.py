@@ -45,16 +45,16 @@ class Answer(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     content = models.TextField(max_length=500)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    upvotes = models.ManyToManyField(User, blank=True, related_name='upvotes')
-    downvotes = models.ManyToManyField(User, blank=True, related_name='downvotes')
+    #upvotes = models.ManyToManyField(User, blank=True, related_name='upvotes')
+    #downvotes = models.ManyToManyField(User, blank=True, related_name='downvotes')
     accepted = models.BooleanField(default=False)
     
     def __str__(self):
         return self.user_post.title
     
-    @property
-    def upvotes_count(self):
-        return Answer.objects.filter(user=self).count()
+    #@property
+    #def upvotes_count(self):
+    #    return Answer.objects.filter(user=self).count()
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=100)
