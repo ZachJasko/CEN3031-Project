@@ -2,6 +2,8 @@
 
 body{
     overflow-x: hidden !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .dx-form .form-control-style-3 {
@@ -62,16 +64,6 @@ body{
     background-color:black;
     border-color: black;
     border-width: 2px;
-}
-
-.upvote-count, .downvote-count{
-    border: ;
-    width: 10px;
-    background-color: #2B72E6;
-    color: white;
-    border-radius: 50%;
-    padding: 5px 10px;
-    line-height: 2;
 }
 
 .dx-comment .dx-comment-cont .dx-comment-name {
@@ -220,3 +212,12 @@ body{
 .dropdown-menu.show {
 	margin-top: 30px;
 }
+
+.overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  
+}
+
