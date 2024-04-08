@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 # Model Forms.
-from .forms import UserPostForm, AnswerForm #, answer
+from .forms import UserPostForm, AnswerForm
 # String module
 from django.template.loader import render_to_string
 
@@ -56,7 +56,7 @@ def postTopic(request, pk):
         TopicView.objects.get_or_create(user=request.user, user_post=post_topic)
 
     # Get all answers of a specific post.
-    answers = Answer.objects.filter(user_post=post_topic)
+    answers = Answer.objects.filter(user_post = post_topic)
 
     # Answer form.
     answer_form = AnswerForm(request.POST or None)
@@ -69,17 +69,13 @@ def postTopic(request, pk):
             return HttpResponseRedirect(post_topic.get_absolute_url())
     else:
         answer_form = AnswerForm()
-
+    
     context = {
-        'topic': post_topic,
-        'answers': answers,
-        'answer_form': answer_form,
+        'topic':post_topic,
+        'answers':answers,
+        'answer_form':answer_form,
+        
     }
-
-    # Add accept_answer_url to the context for each answer
-    for answer in answers:
-        context['accept_answer_url'] = reverse('accept_answer', kwargs={'pk': answer.pk})
-
     return render(request, 'topic-detail.html', context)
 
 @login_required(login_url='login')
@@ -146,12 +142,4 @@ def blogDetailView(request, slug):
     return render(request, 'blog-detail.html', context)  
 
 
-@login_required(login_url='login')
-def accept_answer(request, pk):
-    answer = get_object_or_404(Answer, pk=pk)
-    user_post = answer.user_post
-    if request.user == user_post.author.user:
-        # Toggle the accepted status
-        answer.accepted = not answer.accepted
-        answer.save()
-    return HttpResponseRedirect(user_post.get_absolute_url())
+
