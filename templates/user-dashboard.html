@@ -32,6 +32,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Topic</th>
+                                                <th scope="col">Category</th>
                                                 <th scope="col">Views</th>
                                                 <th scope="col">Answers</th>
                                                 <th scope="col">Post Date</th>
@@ -44,6 +45,7 @@
                                                     <a href="{% url 'topic-detail' post.id %}" class="dx-table-default-title">{{ post.title }}</a>
                                                 </th>
                                                 <td>{{ post.topic_view_count }}</td>
+                                                <td>{{ post.topic.category }}</td>
                                                 <td>{{ post.answer_count }}</td>
                                                 <td>{{ post.date_created }}</td>
                                             </tr>
