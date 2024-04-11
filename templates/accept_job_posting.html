@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accept Job Posting</title>
+</head>
+<body>
+    <h1>Accept Job Posting</h1>
+    <p>Fill out the form below to accept this job posting.</p>
+
+    <!-- Job acceptance form -->
+    <form method="post">
+        {% csrf_token %}
+        <!-- Job acceptance comment -->
+        <label for="comment">Comment:</label><br>
+        <textarea id="comment" name="comment" rows="4" cols="50"></textarea><br>
+
+        <!-- Submit button -->
+        <input type="submit" value="Accept Job">
+    </form>
+</body>
+</html>
