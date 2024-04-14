@@ -36,9 +36,8 @@ def userPost(request):
     if request.method == 'POST':
         if form.is_valid():
             title = request.POST.get('title')
-            category = request.POST.get('category')
             description = request.POST.get('description')
-            topic = UserPost.objects.create(category=category, title=title, author=request.user.author, description=description)
+            topic = UserPost.objects.create(title=title, author=request.user.author, description=description)
             topic.save()
             return redirect('home')
     else:
@@ -142,6 +141,5 @@ def blogDetailView(request, slug):
     }
 
     return render(request, 'blog-detail.html', context)  
-
 
 

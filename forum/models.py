@@ -16,7 +16,6 @@ class Author(models.Model):
 
 class UserPost(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
-    category = models.CharField(max_length=25, null=True)
     title = models.CharField(max_length=200, null=True)
     description = models.TextField(max_length=500, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
@@ -47,10 +46,7 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.user_post.title
-    
-    @property
-    def upvotes_count(self):
-        return Answer.objects.filter(user=self).count()
+
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=100)
@@ -69,10 +65,3 @@ class TopicView(models.Model):
    
     def __str__(self):
         return self.user_post.title
-
-    
-    
-
-
-
-
