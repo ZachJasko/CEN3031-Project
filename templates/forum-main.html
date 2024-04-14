@@ -65,14 +65,14 @@
                                                 <a href="{% url 'topic-detail' post.id %}" class="dx-table-default-title">{{ post.title }}</a>
                                                 <p class="mb-0">{{ post.description }}</p>
                                             </th>
-                                          
-                                            <td>{{ post.category }} </td>
+
+                                            <td></td>
 
                                             <td>{{ post.topic_view_count }}</td>
 
+
                                             <td>{{ post.answer_count }}</td>
-                                          
-                                            <td></td>
+
 
                                             <td class="dx-table-lastPost">
                                                 <div class="dx-table-default-info">
@@ -130,4 +130,5 @@
         </div>
     </div>
 </div>
+
 {% endblock content %}
