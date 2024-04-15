@@ -48,10 +48,7 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.user_post.title
-    
-    @property
-    def upvotes_count(self):
-        return Answer.objects.filter(user=self).count()
+
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=100)
@@ -66,13 +63,6 @@ class BlogPost(models.Model):
 class TopicView(models.Model):
     user_post = models.ForeignKey(UserPost, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-
+   
     def __str__(self):
         return self.user_post.title
-
-    
-    
-
-
-
-

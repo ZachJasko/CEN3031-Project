@@ -17,11 +17,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- START: Styles -->
-
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700%7cMaven+Pro:400,500,700"
-        rel="stylesheet"><!-- %7c -->
-
+          rel="stylesheet"><!-- %7c -->
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{% static 'vendor/bootstrap/dist/css/bootstrap.min.css' %}">
 
@@ -54,7 +52,6 @@
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 
     <!-- END: Styles -->
-
     <!-- jQuery -->
     <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
 
@@ -63,8 +60,7 @@
 
 <body>
     <!-- Navbar -->
-    <nav
-        class="dx-navbar dx-navbar-top dx-navbar-collapse dx-navbar-sticky dx-navbar-expand-lg dx-navbar-dropdown-triangle dx-navbar-autohide">
+    <nav class="dx-navbar dx-navbar-top dx-navbar-collapse dx-navbar-sticky dx-navbar-expand-lg dx-navbar-dropdown-triangle dx-navbar-autohide">
         <div class="container">
 
             <a href="{% url 'home' %}" class="dx-nav-logo">
@@ -72,7 +68,7 @@
                 <h2 class="text-white" style="margin-top:0px; padding-top:10px; margin-bottom:0;">Swamp Services</h2>
             </a>
 
-            
+
             <button type="button" class="dx-navbar-burger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span style="color:white">Menu</span> </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{% url 'home' %}">Home</a>
@@ -93,12 +89,12 @@
 
                 <ul class="dx-nav dx-nav-align-left">
 
-                    
+
                     <li class="dx-drop-item">
                         <a href="{% url 'home' %}">
                             Home
                         </a>
-                        
+
                     </li>
                     <li class="dx-drop-item">
                         <a href="{% url 'blog' %}">
@@ -109,12 +105,12 @@
                         <a href="{% url 'user-post' %}">
                             Post A Topic
                         </a>
-                        
+
                     </li>
                 </ul>
 
                 <ul class="dx-nav dx-nav-align-right">
-                    
+
                     {% if user.is_authenticated %}
                     <li>
                         <div class="dropdown dx-dropdown dx-dropdown-signin">
@@ -137,7 +133,7 @@
                     </li>
                     {% else %}
                     <li>
-                        
+
                         <a href="{% url 'login' %}">Log In</a>
                     </li>
                     <li>
@@ -339,11 +335,13 @@
                     </li>
                     <li>
                         <a data-fancybox data-touch="false" data-close-existing="true" data-src="#login"
-                            href="javascript:;">Log In</a>
+                           href="javascript:;">Log In</a>
                     </li>
                     <li>
-                        <span><a data-fancybox data-touch="false" data-close-existing="true" data-src="#signup"
-                                href="javascript:;" class="dx-btn dx-btn-md dx-btn-transparent">Sign Up</a></span>
+                        <span>
+                            <a data-fancybox data-touch="false" data-close-existing="true" data-src="#signup"
+                               href="javascript:;" class="dx-btn dx-btn-md dx-btn-transparent">Sign Up</a>
+                        </span>
                     </li>
 
                 </ul>
