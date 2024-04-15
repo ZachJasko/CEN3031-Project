@@ -16,9 +16,11 @@ class Author(models.Model):
 
 class UserPost(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
+    category = models.CharField(max_length=25, null=True)
     title = models.CharField(max_length=200, null=True)
     description = models.TextField(max_length=500, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    gatorpnts = models.IntegerField(null=True)
 
     def __str__(self):
         return self.title
@@ -43,8 +45,6 @@ class Answer(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     content = models.TextField(max_length=500)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    upvotes = models.ManyToManyField(User, blank=True, related_name='upvotes')
-    downvotes = models.ManyToManyField(User, blank=True, related_name='downvotes')
 
     def __str__(self):
         return self.user_post.title
@@ -62,7 +62,6 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
-
 
 class TopicView(models.Model):
     user_post = models.ForeignKey(UserPost, on_delete=models.CASCADE)

@@ -1,6 +1,6 @@
 /* PLACE YOU CUSTOM STYLES IN THIS FILE */
 
-body{
+body {
     overflow-x: hidden !important;
 }
 
@@ -110,16 +110,16 @@ body{
 
 /* Customize the label (the container) */
 .form-check-container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .label-text{
@@ -129,11 +129,11 @@ body{
 
 /* Hide the browser's default checkbox */
 .form-check-container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
 }
 
 /* Create a custom checkbox */
@@ -219,4 +219,9 @@ body{
 
 .dropdown-menu.show {
 	margin-top: 30px;
+}
+
+div {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
