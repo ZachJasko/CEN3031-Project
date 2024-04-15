@@ -71,8 +71,6 @@
                                         <tr>
                                             <th scope="col">Topic</th>
                                             <th scope="col">Answers</th>
-                                            <th scope="col">Upvote</th>
-                                            <th scope="col">Downvote</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,8 +81,6 @@
                                                 
                                             </th>
                                             <td>{{ ans.content }}</td> 
-                                            <td>{{ ans.upvotes.count }}</td>
-                                            <td>{{ ans.downvotes.count }}</td> 
                                         </tr>
                                         {% endfor %}                                    
                                     </tbody>
@@ -100,4 +96,5 @@
         </div>
     </div>
 </div>
+
 {% endblock content %}
