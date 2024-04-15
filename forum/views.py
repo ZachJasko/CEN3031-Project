@@ -36,8 +36,10 @@ def userPost(request):
     if request.method == 'POST':
         if form.is_valid():
             title = request.POST.get('title')
+            category = request.POST.get('category')
             description = request.POST.get('description')
-            topic = UserPost.objects.create(title=title, author=request.user.author, description=description)
+            gatorpnts = request.POST.get('gatorpnts')
+            topic = UserPost.objects.create(category=category, title=title, author=request.user.author, description=description, gatorpnts=gatorpnts)
             topic.save()
             return redirect('home')
     else:
@@ -69,13 +71,13 @@ def postTopic(request, pk):
             return HttpResponseRedirect(post_topic.get_absolute_url())
     else:
         answer_form = AnswerForm()
-    
+
     context = {
         'topic':post_topic,
         'answers':answers,
         'answer_form':answer_form,
-        
     }
+
     return render(request, 'topic-detail.html', context)
 
 @login_required(login_url='login')

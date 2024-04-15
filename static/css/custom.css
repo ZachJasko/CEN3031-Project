@@ -209,5 +209,11 @@ body {
 }
 
 .dropdown-menu.show {
-    margin-top: 30px;
+	margin-top: 30px;
 }
+
+div {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
