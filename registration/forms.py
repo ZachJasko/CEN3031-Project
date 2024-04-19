@@ -8,12 +8,7 @@ from forum.models import Author
 
 # Creating custom User registration form utilizing the default one
 class UserRegisterForm(UserCreationForm):
-
-    # Create fields for all registration info
     email = forms.EmailField(required=True)
-    username = forms.CharField(required=True)
-    password1 = forms.CharField(required=True)
-    password2 = forms.CharField(required=True)
     class Meta:
         model = User
         fields = ['username','email','password1','password2']
