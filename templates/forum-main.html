@@ -33,7 +33,10 @@
         </div>
     </header>
 
-    <div class="dx-box-5 pb-100">
+    
+    <div class="dx-separator"></div>
+
+    <div class="dx-box-5 pb-100 bg-grey-6">
         <div class="container">
             <div class="row vertical-gap md-gap">
                 <div class="col-lg-8">
@@ -91,21 +94,6 @@
                 <div class="col-lg-4">
                     <div class="dx-sticky dx-sidebar" data-sticky-offsetTop="120" data-sticky-offsetBot="40">
 
-
-                        <div class="dx-widget dx-box dx-box-decorated">
-                            <div class="dx-widget-title">
-                                Latest Post
-                            </div>
-                            {% for blogs in latest_blogs %}
-                            <a href="{% url 'article-detail' blogs.slug %}" class="dx-widget-link">
-                                <span class="dx-widget-link-text">{{ blogs.title }}</span>
-                                <span class="dx-widget-link-date">{{ blogs.timestamp|date }}</span>
-                            </a>
-                            {% endfor %}
-                            
-                        </div>
-
-
                         <div class="dx-widget dx-box dx-box-decorated">
                             <div class="dx-widget-title">
                                 Latest Forum Topics
@@ -118,16 +106,11 @@
                             {% endfor %}
                             
                         </div>
-
-                        <div class="dx-widget">
-
-                        </div>
-
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock content %}
