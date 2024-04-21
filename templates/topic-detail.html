@@ -30,7 +30,7 @@
                         {% else %}
                         <h2 class="h4 mb-45">Be the first to reply to this topic.</h2>
                         {% endif %}
-
+                        
                         {% for answer in answers %}
                         <div class="dx-comment {% if answer.accepted %}accepted-answer{% endif %}"> 
 
@@ -63,15 +63,15 @@
                                         <p class="mb-0">{{ answer.content }}</p>
                                     </div>
                                         <!-- Accept Service Button -->
-                                        {% if user == topic.author.user %}
-                                            <a href="{{ answer.accept_answer_url }}" class="btn btn-success">
-                                                {% if answer.accepted %}
-                                                    Unaccept Service
-                                                {% else %}
-                                                    Accept Service
-                                                {% endif %}
-                                            </a>
-                                        {% endif %}
+                                    {% if user == topic.author.user %}
+                                        <a href="{{ answer.accept_answer_url }}" class="btn btn-success">
+                                            {% if answer.accepted %}
+                                                Unaccept Service
+                                            {% else %}
+                                                Accept Service
+                                            {% endif %}
+                                        </a>
+                                    {% endif %}
                                     <!-- / Accept Service Button -->
                                 </div>
                             </div>
@@ -79,6 +79,7 @@
                         {% endfor %}
 
 
+                        {% if post_is_open %}
                         <form action="" method="POST" class="dx-form mt-50 mb-45">
                             <div class="row vertical-gap">
                                 <div class="col-12">
@@ -88,6 +89,9 @@
                                 </div>
                             </div>
                         </form>
+                        {% else %}
+                        <p class="text-center">This post is closed for replies.</p>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -98,11 +102,13 @@
 
                         <div class="dx-widget dx-box dx-box-decorated">
                             <div class="dx-widget-title">Status of Post (Open or Close)</div>
-                            <!--#If it is after the service end date, automatically close the post
-                #Admin should have ability to close or open a post for saftey reasons-->
-                            <button type="button" onclick="alert('This post has been CLOSED!')">Close this Post</button>
-                            <button type="button" onclick="alert('This post has been OPEN!')">Open this Post</button>
+                            {% if post_is_open %}
+                                <a href="{% url 'close-post' topic.pk %}" class="btn btn-danger">Close this Post</a>
+                            {% else %}
+                                <a href="{% url 'open-post' topic.pk %}" class="btn btn-success">Open this Post</a>
+                            {% endif %}
                         </div>
+
                     </div>
                 </div>
                 {% endif %}

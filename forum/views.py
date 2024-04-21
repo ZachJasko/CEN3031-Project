@@ -11,6 +11,8 @@ from .forms import UserPostForm, AnswerForm #, answer
 # String module
 from django.template.loader import render_to_string
 
+from .models import UserPost
+
 # Create your views here.
 
 def home(request):
@@ -76,6 +78,8 @@ def postTopic(request, pk):
         'topic':post_topic,
         'answers':answers,
         'answer_form':answer_form,
+        'is_moderator': request.user.author.is_moderator,  # Pass moderator status
+        'post_is_open': post_topic.is_open,  # Pass post status
     }
 
     # Add accept_answer_url to the context for each answer
@@ -162,3 +166,19 @@ def accept_answer(request, pk):
         answer.accepted = not answer.accepted
         answer.save()
     return HttpResponseRedirect(user_post.get_absolute_url())
+
+@login_required(login_url='login')
+def close_post(request, pk):
+    if request.user.author.is_moderator:
+        post = get_object_or_404(UserPost, pk=pk)
+        post.is_open = False
+        post.save()
+    return redirect('topic-detail', pk=pk)
+
+@login_required(login_url='login')
+def open_post(request, pk):
+    if request.user.author.is_moderator:
+        post = get_object_or_404(UserPost, pk=pk)
+        post.is_open = True
+        post.save()
+    return redirect('topic-detail', pk=pk)
