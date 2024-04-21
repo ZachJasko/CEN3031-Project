@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 # Model Forms.
-from .forms import UserPostForm, AnswerForm
+from .forms import UserPostForm, AnswerForm #, answer
 # String module
 from django.template.loader import render_to_string
 
@@ -78,6 +78,11 @@ def postTopic(request, pk):
         'answer_form':answer_form,
     }
 
+    # Add accept_answer_url to the context for each answer
+    for answer in answers:
+        answer.accept_answer_url = reverse('accept_answer', kwargs={'pk': answer.pk})
+        context['answers'] = answers  # Update the context with modified answers
+
     return render(request, 'topic-detail.html', context)
 
 @login_required(login_url='login')
@@ -145,3 +150,15 @@ def blogDetailView(request, slug):
     return render(request, 'blog-detail.html', context)  
 
 
+@login_required(login_url='login')
+def accept_answer(request, pk):
+    answer = get_object_or_404(Answer, pk=pk)
+    user_post = answer.user_post
+    if request.user == user_post.author.user:
+        # Unaccept all other answers for this post
+        user_post.answer_set.exclude(pk=pk).update(accepted=False)
+
+        # Toggle the accepted status of the selected answer
+        answer.accepted = not answer.accepted
+        answer.save()
+    return HttpResponseRedirect(user_post.get_absolute_url())
