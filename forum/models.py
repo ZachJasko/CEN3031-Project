@@ -22,6 +22,7 @@ class UserPost(models.Model):
     description = models.TextField(max_length=500, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     gatorpnts = models.IntegerField(null=True)
+    is_open = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
