@@ -31,7 +31,7 @@
                         <h2 class="h4 mb-45">Be the first to reply to this topic.</h2>
                         {% endif %}
                         {% for answer in answers %}
-                        <div class="dx-comment">
+                        <div class="dx-comment {% if answer.accepted %}accepted-answer{% endif %}"> 
 
                             <div>
                                 <div class="dx-comment-img">
@@ -61,7 +61,17 @@
                                     <div class="dx-comment-text">
                                         <p class="mb-0">{{ answer.content }}</p>
                                     </div>
-
+                                        <!-- Accept Service Button -->
+                                    {% if user == topic.author.user %}
+                                        <a href="{{ accept_answer_url }}" class="btn btn-success">
+                                            {% if answer.accepted %}
+                                                Unaccept Service
+                                            {% else %}
+                                                Accept Service
+                                            {% endif %}
+                                        </a>
+                                    {% endif %}
+                                    <!-- / Accept Service Button -->
                                 </div>
                             </div>
                         </div>

@@ -25,9 +25,14 @@
                                     {% if user.author.is_moderator%}
                                     Student Council Moderator
                                     {% else %}
-                                    
                                     General User
                                     {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-lg-12">
+                                    <p><br><i class="fa fa-id-card-o" aria-hidden="true"></i><br>{{ user.author.bio }}</p>
                                 </div>
                             </div>
                         </div>

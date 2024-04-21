@@ -295,6 +295,10 @@ tr {
     background-color: #487BCF;
 }
 
+.accepted-answer {
+  border-left: 5px solid #00C915;
+}
+
 /* Color codes 
     Peach: #F98C31
     Dark Blue: #0800FE
