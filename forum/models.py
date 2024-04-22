@@ -52,6 +52,7 @@ class Answer(models.Model):
     content = models.TextField(max_length=500)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     accepted = models.BooleanField(default=False)
+    gatorpnts = models.IntegerField(null=True)
 
     def __str__(self):
         return self.user_post.title
@@ -73,3 +74,12 @@ class TopicView(models.Model):
    
     def __str__(self):
         return self.user_post.title
+
+class Leaderboard(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    lead_names = models.CharField(max_length=100)
+    tot_gatorpnts = models.IntegerField(default=0, null=True)
+    badge = models.ImageField(default="1.jpg", null=True, blank=True)
+    
+    def __str__(self):
+        return self.user.username

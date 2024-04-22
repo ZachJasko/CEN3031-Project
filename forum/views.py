@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import *
-from django.db.models import Count, Q
+from django.db.models import Count, Q, F
 from django.contrib.auth.decorators import login_required
 # importing messages
 from django.contrib import messages
@@ -80,6 +80,9 @@ def postTopic(request, pk):
 
     # Get all answers of a specific post.
     answers = Answer.objects.filter(user_post = post_topic)
+    
+    # Get points assigned to the post to align with the answers
+    gatorpnts = UserPost.objects.get(title=post_topic).gatorpnts
 
     # Answer form.
     answer_form = AnswerForm(request.POST or None)
@@ -87,7 +90,7 @@ def postTopic(request, pk):
         if answer_form.is_valid():
             content = request.POST.get('content')
             # passing User Id & User Post Id to DB
-            ans = Answer.objects.create(user_post=post_topic, user=request.user, content=content)
+            ans = Answer.objects.create(user_post=post_topic, user=request.user, content=content, gatorpnts=gatorpnts)
             ans.save()
             return HttpResponseRedirect(post_topic.get_absolute_url())
     else:
@@ -99,6 +102,7 @@ def postTopic(request, pk):
         'answer_form':answer_form,
         'is_moderator': request.user.author.is_moderator,  # Pass moderator status
         'post_is_open': post_topic.is_open,  # Pass post status
+        'gatorpnts':gatorpnts,
     }
 
     # Add accept_answer_url to the context for each answer
@@ -177,6 +181,8 @@ def blogDetailView(request, slug):
 def accept_answer(request, pk):
     answer = get_object_or_404(Answer, pk=pk)
     user_post = answer.user_post
+    user_name = answer.user.username
+ 
     if request.user == user_post.author.user:
         # Unaccept all other answers for this post
         user_post.answer_set.exclude(pk=pk).update(accepted=False)
@@ -184,6 +190,18 @@ def accept_answer(request, pk):
         # Toggle the accepted status of the selected answer
         answer.accepted = not answer.accepted
         answer.save()
+    
+    if answer.accepted == True and Leaderboard.objects.filter(lead_names=user_name).exists() == False:
+        leaders = Leaderboard.objects.create(user=answer.user, lead_names=user_name)
+        leaders.save()
+        Leaderboard.objects.filter(user = answer.user).update(tot_gatorpnts=F('tot_gatorpnts')+answer.gatorpnts)
+    elif answer.accepted == True and Leaderboard.objects.filter(lead_names=user_name).exists() == True:
+        Leaderboard.objects.filter(user = answer.user).update(tot_gatorpnts=F('tot_gatorpnts')+answer.gatorpnts)
+    elif answer.accepted == False:
+        pass
+    else:
+        pass
+
     return HttpResponseRedirect(user_post.get_absolute_url())
 
 @login_required(login_url='login')
