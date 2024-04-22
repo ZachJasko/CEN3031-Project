@@ -37,6 +37,10 @@ class UserPost(models.Model):
     def answer_count(self):
         return Answer.objects.filter(user_post=self).count()
     
+    #@property
+    #def answer_count(self):
+    #    return self.answer_set.count()
+
     # Use this method as a property 
     @property
     def topic_view_count(self):

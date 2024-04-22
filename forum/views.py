@@ -16,7 +16,24 @@ from .models import UserPost
 # Create your views here.
 
 def home(request):
-    user_posts = UserPost.objects.all()
+
+    sort_by = request.GET.get('sort', 'postdate')  # Default sort by date created
+    
+    ordering_options = {
+        'category': 'category',
+        'views': '-topicview_count', 
+        'replies': '-answer_count',
+        'postdate': '-date_created',
+        'gatorpoints': '-gatorpnts',
+    }
+
+    # Validate sorting option
+    if sort_by not in ordering_options:
+        sort_by = 'date_created'
+
+    user_posts = UserPost.objects.all().order_by(ordering_options[sort_by])
+
+    #user_posts = UserPost.objects.all()
     
     # Display latest posts.
     latest_blogs = BlogPost.objects.order_by('-timestamp')[0:3]
@@ -26,7 +43,9 @@ def home(request):
     context = {
         'user_posts':user_posts,
         'latest_blogs':latest_blogs,
-        'latest_topics':latest_topics
+        'latest_topics':latest_topics,
+        'sort_by': sort_by,
+        'ordering_options': ordering_options,
     }
     return render(request, 'forum-main.html', context)
 
@@ -182,3 +201,5 @@ def open_post(request, pk):
         post.is_open = True
         post.save()
     return redirect('topic-detail', pk=pk)
+
+
