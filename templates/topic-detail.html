@@ -11,14 +11,13 @@
 
                         <div class="dx-blog-post-box">
 
-                            <h1 class="h3 dx-blog-post-title">{{ topic.title }}</h1>
-                            <ul class="dx-blog-post-info">
+                            <h1 class="h3 dx-blog-post-title" style="text-align:center">{{ topic.title }}</h1>
+                            <ul class="dx-blog-post-info" style="text-align:center">
                                 <li>Date Posted: {{ topic.date_created }}</li>
                                 <li>Total Views: {{ topic.topic_view_count }}</li>
                                 <li>Author: {{ topic.author.user }}</li>
                                 <li>Category: {{topic.category}} </li>
-                                <li>Service Start Date: </li>
-                                <li>Service End Date: </li>
+                                <li>Gator Points: {{topic.gatorpnts}}</li>
                             </ul>
                             <p class="mnb-2">{{ topic.description }}</p>
                         </div>
@@ -62,6 +61,7 @@
                                     <div class="dx-comment-text">
                                         <p class="mb-0">{{ answer.content }}</p>
                                     </div>
+                                    
                                         <!-- Accept Service Button -->
                                     {% if user == topic.author.user %}
                                         <a href="{{ answer.accept_answer_url }}" class="btn btn-success">
@@ -73,6 +73,7 @@
                                         </a>
                                     {% endif %}
                                     <!-- / Accept Service Button -->
+
                                 </div>
                             </div>
                         </div>
