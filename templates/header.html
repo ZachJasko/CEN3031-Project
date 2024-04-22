@@ -76,7 +76,7 @@
             <button type="button" class="dx-navbar-burger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span style="color:white">Menu</span> </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{% url 'home' %}">Home</a>
-                <a class="dropdown-item" href="{% url 'blog' %}">Gator Corner</a>
+                <a class="dropdown-item" href="{% url 'blog' %}">Leaderboard</a>
                 <a class="dropdown-item" href="{% url 'user-post' %}">Post A Topic</a>
                 <div class="dropdown-divider"></div>
                 {% if user.is_authenticated %}
@@ -102,7 +102,7 @@
                     </li>
                     <li class="dx-drop-item">
                         <a href="{% url 'blog' %}">
-                            Gator Corner
+                            Leaderboard
                         </a>
                     </li>
                     <li class="dx-drop-item">

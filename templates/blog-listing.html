@@ -11,39 +11,80 @@
 
             <div class="row justify-content-center">
                 <div class="col-xl-7">
-                    <h1 class="h2 mb-30 text-white text-center" style="font-weight: bold">Gator Corner</h1>
-                    <p style="text-align:center; color: white; font-weight: 500">Students with the most Gator Points are presented here!</p>
+                    <h1 class="h2 mb-30 text-white text-center" style="font-weight: bold">Swamp Services Leaderboard</h1>
+                    <p style="text-align:center; color: white; font-weight: 500">
+                    Gator points are assigned based on the length and difficulty of a service oppurtunity.
+                    Students with the most Gator Points are presented here!
+                    </p>
                 </div>
             </div>
         </div>
     </header>
 
-    
-    <div class="dx-separator"></div>
-
     <div class="dx-box-5 pb-100 bg-grey-6">
         <div class="container">
             <div class="row vertical-gap md-gap">
                 <div class="col-lg-8 offset-md-2">
-                    <div class="dx-box dx-box-decorated">
-                        <div class="dx-blog-post">
-                            <div class="dx-blog-post-box pt-30 pb-30">
-                                {% for post in all_posts %}
-                                <a href="{% url 'article-detail' post.slug %}"><h2 class="h5" style="color: #2B72E6;">{{ post.title }}</h2></a>
-                                <p>{{ post.content|safe|truncatewords:30 }}</p>  
-                                
-                                <ul class="dx-blog-post-info" style="margin-bottom: 60px;">
-                                    <li> <i class="fa fa-pencil"></i> Post by: {{ post.author.user }}</li> <!-- Post by: Admin -->
-                                    <li> <i class="fa fa-calendar" aria-hidden="true"></i> Written at: {{ post.timestamp|date }}</li>
-                                </ul>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
+                    <table class="dx-table dx-table-default">
+                        <thead> 
+                            <tr>
+                                <th scope="col" style="width: 20px">Top 10 Students</th>
+                                <th scope="col" >Account Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="col">1.</th>
+                                <td scope="col">Name var</th>
+                            </tr>
+
+                            <tr>
+                                <td scope="col">2.</th>
+                                <td scope="col">Name var</th>
+                            </tr>
+
+                            <tr>
+                                <td scope="col">3.</th>
+                                <td scope="col">Name var</th>
+                            </tr>
+
+                            <tr>
+                                <td scope="col">4.</th>
+                                <td scope="col">Name var</th>
+                            </tr>
+
+                            <tr>
+                                <td scope="col">5.</th>
+                                <td scope="col">Name var</th>
+                            </tr>
+
+                            <tr>
+                                <td scope="col">6.</th>
+                                <td scope="col">Name var</th>
+                            </tr>
+
+                            <tr>
+                                <td scope="col">7.</th>
+                                <td scope="col">Name var</th>
+                            </tr>
+
+                            <tr>
+                                <td scope="col">8.</th>
+                                <td scope="col">Name var</th>
+                            </tr>
+
+                            <tr>
+                                <td scope="col">9.</th>
+                                <td scope="col">Name var</th>
+                            </tr>
+
+                            <tr>
+                                <td scope="col">10.</th>
+                                <td scope="col">Name var</th>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-              
-                   
-               
             </div>
         </div>
     </div>
