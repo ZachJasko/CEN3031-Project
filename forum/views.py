@@ -125,8 +125,8 @@ def userDashboard(request):
         'ans_posted':ans_posted,
         'topic_count':topic_count,
         'ans_count':ans_count
-        
     }
+    
     return render(request, 'user-dashboard.html', context)
 
 def searchView(request):
@@ -152,16 +152,17 @@ def searchView(request):
 
     return render(request, 'search-result.html', context)
 
-
-
 # Blog listing page view.
 def blogListView(request):
     
     # Display all blog posts.
     all_posts = BlogPost.objects.all()
+   
+    all_leaders = Leaderboard.objects.all().order_by('-tot_gatorpnts')[:10]
     
     context = {
-        'all_posts':all_posts
+        'all_posts':all_posts,
+        'all_leaders':all_leaders,
     }
     return render(request, 'blog-listing.html', context)
 
@@ -176,7 +177,6 @@ def blogDetailView(request, slug):
     }
 
     return render(request, 'blog-detail.html', context)  
-
 
 @login_required(login_url='login')
 def accept_answer(request, pk):

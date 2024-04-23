@@ -45,8 +45,8 @@
                                                 <th scope="row">
                                                     <a href="{% url 'topic-detail' post.id %}" class="dx-table-default-title" style="width: 100px; overflow-wrap: break-word;">{{ post.title }}</a>
                                                 </th>
+                                                <td>{{ post.category }}</td>
                                                 <td>{{ post.topic_view_count }}</td>
-                                                <td>{{ post.topic.category }}</td>
                                                 <td>{{ post.answer_count }}</td>
                                                 <td>{{ post.date_created }}</td>
                                                 <td>{{ post.gatorpnts }}</td>
