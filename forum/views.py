@@ -4,6 +4,7 @@ from .models import *
 from django.db.models import Count, Q, F
 from django.contrib.auth.decorators import login_required
 # importing messages
+from django.db.models import F  # Import F expression
 from django.contrib import messages
 
 # Model Forms.
@@ -124,8 +125,8 @@ def userDashboard(request):
         'ans_posted':ans_posted,
         'topic_count':topic_count,
         'ans_count':ans_count
-        
     }
+    
     return render(request, 'user-dashboard.html', context)
 
 def searchView(request):
@@ -151,16 +152,17 @@ def searchView(request):
 
     return render(request, 'search-result.html', context)
 
-
-
 # Blog listing page view.
 def blogListView(request):
     
     # Display all blog posts.
     all_posts = BlogPost.objects.all()
+   
+    all_leaders = Leaderboard.objects.all().order_by('-tot_gatorpnts')[:10]
     
     context = {
-        'all_posts':all_posts
+        'all_posts':all_posts,
+        'all_leaders':all_leaders,
     }
     return render(request, 'blog-listing.html', context)
 
@@ -176,31 +178,32 @@ def blogDetailView(request, slug):
 
     return render(request, 'blog-detail.html', context)  
 
-
 @login_required(login_url='login')
 def accept_answer(request, pk):
     answer = get_object_or_404(Answer, pk=pk)
     user_post = answer.user_post
     user_name = answer.user.username
- 
+
     if request.user == user_post.author.user:
-        # Unaccept all other answers for this post
+        # unaccept all other answers for this post
         user_post.answer_set.exclude(pk=pk).update(accepted=False)
 
-        # Toggle the accepted status of the selected answer
-        answer.accepted = not answer.accepted
+        # toggle the accepted status and update Gator Points
+        if answer.accepted:
+            # unaccepting: Deduct points
+            answer.accepted = False
+            Leaderboard.objects.filter(user=answer.user).update(
+                tot_gatorpnts=F('tot_gatorpnts') - answer.gatorpnts
+            )
+        else:
+            # accepting ---- Add points only if not already accepted
+            answer.accepted = True
+            user_post.answer_set.exclude(pk=pk).update(accepted=False)
+            Leaderboard.objects.filter(user=answer.user).update(
+                tot_gatorpnts=F('tot_gatorpnts') + answer.gatorpnts
+            ) 
+
         answer.save()
-    
-    if answer.accepted == True and Leaderboard.objects.filter(lead_names=user_name).exists() == False:
-        leaders = Leaderboard.objects.create(user=answer.user, lead_names=user_name)
-        leaders.save()
-        Leaderboard.objects.filter(user = answer.user).update(tot_gatorpnts=F('tot_gatorpnts')+answer.gatorpnts)
-    elif answer.accepted == True and Leaderboard.objects.filter(lead_names=user_name).exists() == True:
-        Leaderboard.objects.filter(user = answer.user).update(tot_gatorpnts=F('tot_gatorpnts')+answer.gatorpnts)
-    elif answer.accepted == False:
-        pass
-    else:
-        pass
 
     return HttpResponseRedirect(user_post.get_absolute_url())
 

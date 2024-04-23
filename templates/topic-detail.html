@@ -25,9 +25,9 @@
 
                     <div class="dx-box mt-55">
                         {% if  answers.count > 0 %}
-                        <h2 class="h4 mb-45">{{ answers.count }} response{{ answers|pluralize }} in this topic: </h2>
+                        <h2 class="h4 mb-45" style="color:white">{{ answers.count }} response{{ answers|pluralize }} in this topic: </h2>
                         {% else %}
-                        <h2 class="h4 mb-45">Be the first to reply to this topic.</h2>
+                        <h2 class="h4 mb-45" style="color:white; font-weight:500; text-align:center">Be the first to reply to this topic.</h2>
                         {% endif %}
                         
                         {% for answer in answers %}
@@ -39,26 +39,26 @@
                                 </div>
                                 <div class="dx-comment-cont">
                                     <p class="dx-comment-info">
-                                        <span class="dx-comment-name">{{ answer.user|capfirst }}</span>
+                                        <span class="dx-comment-name" style="color:white; font-weight:600">{{ answer.user|capfirst }}</span>
 
                                         {% if answer.user.author.is_moderator %}
                                         <span class="dx-comment-profession">
-                                            <img src="{% static 'images/SG-Logo-Color.png' %}" width="45px;" alt="">
+                                            <img src="{% static 'images/SG-Logo-Color.png' %}" style="width:45px;" alt="">
                                             <span class="label-moderator">Student Council Moderator</span>
                                         </span>
                                         {% else %}
                                         <span class="dx-comment-profession">
-                                            <img src="{% static '../static/images/gator-mascot-head-vector.png' %}" width="45px" alt="">
+                                            <img src="{% static '../static/images/gator-mascot-head-vector.png' %}" style="width:45px;" alt="">
                                             <span class="label-user">General User</span>
                                         </span>
                                         {% endif %}
 
-                                        <span class="dx-comment-date" style="color: black">
+                                        <span class="dx-comment-date" style="color:white; text-align:left">
                                             answered at {{ answer.date_created }}
                                         </span>
                                     </p>
 
-                                    <div class="dx-comment-text">
+                                    <div class="dx-comment-text" style="color:white">
                                         <p class="mb-0">{{ answer.content }}</p>
                                     </div>
                                     
@@ -91,7 +91,7 @@
                             </div>
                         </form>
                         {% else %}
-                        <p class="text-center">This post is closed for replies.</p>
+                        <p class="text-center" style="color:white; font-weight:500;">This post is closed for replies.</p>
                         {% endif %}
                     </div>
                 </div>

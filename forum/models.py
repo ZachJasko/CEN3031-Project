@@ -79,7 +79,7 @@ class Leaderboard(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     lead_names = models.CharField(max_length=100)
     tot_gatorpnts = models.IntegerField(default=0, null=True)
-    badge = models.ImageField(default="1.jpg", null=True, blank=True)
+    #badge = models.ImageField(default="../static/images/1.jpg", null=True, blank=True)
     
     def __str__(self):
         return self.user.username
