@@ -220,7 +220,7 @@ div {
 
 
 
-
+/* Modifies all html classes of this type (handles overflows)*/
 p {
     overflow-wrap: break-word;
     word-wrap: break-word;

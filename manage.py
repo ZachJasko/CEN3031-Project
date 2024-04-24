@@ -3,7 +3,7 @@
 import os
 import sys
 
-
+# django runner
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CommunityApp.settings')
     try:

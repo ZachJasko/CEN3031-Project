@@ -16,6 +16,7 @@ from .models import UserPost
 
 # Create your views here.
 
+# Home screen to list all the posts from the users and mods
 def home(request):
 
     sort_by = request.GET.get('sort', 'postdate')  # Default sort by date created
@@ -50,6 +51,7 @@ def home(request):
     }
     return render(request, 'forum-main.html', context)
 
+# function to create a post
 @login_required(login_url='login')
 def userPost(request):
     # User Post form.
@@ -70,6 +72,7 @@ def userPost(request):
     context = {'form':form}
     return render(request, 'user-post.html', context)
 
+# function to create a reply to a post
 @login_required(login_url='login')
 def postTopic(request, pk):
     # Get specific user post by id.
@@ -113,6 +116,7 @@ def postTopic(request, pk):
 
     return render(request, 'topic-detail.html', context)
 
+#function that provides details on post replies, post made etc. from the logged in user
 @login_required(login_url='login')
 def userDashboard(request):
     topic_posted = request.user.author.userpost_set.all()
@@ -129,6 +133,7 @@ def userDashboard(request):
     
     return render(request, 'user-dashboard.html', context)
 
+#fuzzy searches the home screen
 def searchView(request):
     queryset = UserPost.objects.all()
     search_query = request.GET.get('q')
@@ -178,6 +183,7 @@ def blogDetailView(request, slug):
 
     return render(request, 'blog-detail.html', context)  
 
+# accept service functionality. Allots gator points also
 @login_required(login_url='login')
 def accept_answer(request, pk):
     answer = get_object_or_404(Answer, pk=pk)
@@ -207,6 +213,7 @@ def accept_answer(request, pk):
 
     return HttpResponseRedirect(user_post.get_absolute_url())
 
+# Closes the post when mod hits "Close this post" button
 @login_required(login_url='login')
 def close_post(request, pk):
     if request.user.author.is_moderator:
@@ -215,6 +222,7 @@ def close_post(request, pk):
         post.save()
     return redirect('topic-detail', pk=pk)
 
+# Opens the post when mod hits "Open this post" button
 @login_required(login_url='login')
 def open_post(request, pk):
     if request.user.author.is_moderator:

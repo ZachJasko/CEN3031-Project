@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
-
+# runs the registration module
 class RegistrationConfig(AppConfig):
     name = 'registration'
 
