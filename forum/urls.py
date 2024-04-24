@@ -2,6 +2,7 @@ from django.urls import path
 
 from .import views
 
+# Put your url redirects here
 urlpatterns = [
     path('', views.home, name='home'),
     path('user-post/', views.userPost, name='user-post'),
